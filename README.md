@@ -343,3 +343,224 @@ If you want next:
 ✅ Viva questions
 
 Just tell 👍
+Here are your **PostgreSQL (Postgres) SQL commands** for your practical questions (simple and correct for exam) 👇
+
+---
+
+# ✅ **Q1: Property & Owner Tables**
+
+### 🔹 Create Tables
+
+```sql
+CREATE TABLE Owner (
+    owner_name VARCHAR(50) PRIMARY KEY,
+    address VARCHAR(50),
+    phoneno BIGINT,
+    income INTEGER
+);
+
+CREATE TABLE Property (
+    pnumber INTEGER PRIMARY KEY,
+    description VARCHAR(50) NOT NULL,
+    area CHAR(10),
+    owner_name VARCHAR(50),
+    FOREIGN KEY (owner_name) REFERENCES Owner(owner_name)
+);
+```
+
+---
+
+### 🔹 Queries
+
+1. **List properties in specific area**
+
+```sql
+SELECT * FROM Property WHERE area = 'Pune';
+```
+
+2. **Owners whose name starts with 'A'**
+
+```sql
+SELECT * FROM Owner WHERE owner_name LIKE 'A%';
+```
+
+3. **Count of properties in area**
+
+```sql
+SELECT COUNT(*) FROM Property WHERE area = 'Pune';
+```
+
+4. **Count of owners in each area**
+
+```sql
+SELECT area, COUNT(*) 
+FROM Property 
+GROUP BY area;
+```
+
+5. **Owners with average income**
+
+```sql
+SELECT AVG(income) FROM Owner;
+```
+
+---
+
+# ✅ **Q2: Student & Exams Tables**
+
+### 🔹 Create Tables
+
+```sql
+CREATE TABLE Student (
+    stud_id INTEGER PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    class CHAR(10)
+);
+
+CREATE TABLE Exams (
+    exam_id INTEGER PRIMARY KEY,
+    s_no INTEGER,
+    sub VARCHAR(10),
+    score INTEGER,
+    exam_date DATE,
+    FOREIGN KEY (s_no) REFERENCES Student(stud_id)
+);
+```
+
+---
+
+### 🔹 Queries
+
+1. **All students and exams**
+
+```sql
+SELECT * FROM Student
+JOIN Exams ON Student.stud_id = Exams.s_no;
+```
+
+2. **Students of specific branch**
+
+```sql
+SELECT * FROM Student WHERE class = 'CS';
+```
+
+3. **Math scores ascending**
+
+```sql
+SELECT * FROM Exams 
+WHERE sub = 'Math'
+ORDER BY score ASC;
+```
+
+4. **Total score of student**
+
+```sql
+SELECT SUM(score) 
+FROM Exams 
+WHERE s_no = 1;
+```
+
+5. **Average Computer score**
+
+```sql
+SELECT AVG(score) 
+FROM Exams 
+WHERE sub = 'Computer';
+```
+
+6. **Count exams per student**
+
+```sql
+SELECT s_no, COUNT(*) 
+FROM Exams 
+GROUP BY s_no;
+```
+
+7. **Student name with score**
+
+```sql
+SELECT name, score 
+FROM Student 
+JOIN Exams ON Student.stud_id = Exams.s_no;
+```
+
+---
+
+# ✅ **Q3: Book & Member Tables**
+
+### 🔹 Create Tables
+
+```sql
+CREATE TABLE Member (
+    m_name VARCHAR(50) PRIMARY KEY,
+    address VARCHAR(50),
+    phoneno BIGINT,
+    age INTEGER
+);
+
+CREATE TABLE Book (
+    b_id INTEGER PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    category CHAR(20),
+    m_name VARCHAR(50),
+    FOREIGN KEY (m_name) REFERENCES Member(m_name)
+);
+```
+
+---
+
+### 🔹 Queries
+
+1. **Books in category**
+
+```sql
+SELECT * FROM Book WHERE category = 'Fiction';
+```
+
+2. **Members starting with 'A'**
+
+```sql
+SELECT * FROM Member WHERE m_name LIKE 'A%';
+```
+
+3. **Total books in category**
+
+```sql
+SELECT COUNT(*) FROM Book WHERE category = 'Fiction';
+```
+
+4. **Count books per category**
+
+```sql
+SELECT category, COUNT(*) 
+FROM Book 
+GROUP BY category;
+```
+
+5. **Average age of members**
+
+```sql
+SELECT AVG(age) FROM Member;
+```
+
+---
+
+# ✅ **Important Notes (for exam)**
+
+* Use `LIKE 'A%'` → starts with A
+* Use `COUNT()` → number of records
+* Use `AVG()` → average
+* Use `SUM()` → total
+* Use `JOIN` → combine tables
+
+---
+
+# 🎯 If you want:
+
+I can also give
+✅ **Insert values (sample data)**
+✅ **Output tables**
+✅ **Viva questions + answers**
+
+Just tell me 👍
+
